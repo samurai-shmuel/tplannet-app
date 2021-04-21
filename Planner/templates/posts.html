@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+    {% block head %}<title>Tlogger Posts</title>{% endblock %}
+    {% block styles %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+    .reacts{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        height: fit-content;
+        left: 86%;
+    }
+
+    .reacts p{
+        margin-right: 10px;
+        font-size: larger;
+    }
+
+    .reacts button{
+        background: transparent;
+        color: white;
+        border: none;
+        margin-right: 3px;
+    }
+
+    .posts{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .posts h1{
+        margin: 0.5em 2em;
+    }
+
+    .chat{
+        justify-content: center;
+        display: block;
+    }
+
+    .msg{
+        padding: 0.5em;
+        width: 80vw;
+        display: flex;
+    }
+
+    .texter{
+        position: relative;
+    }
+
+    .past_post{
+        margin: 0 1em;
+        border-radius: 0.5em;
+        padding: 0.4em;
+        display: block;
+        background: linear-gradient(90deg, rgba(31,68,97,1) 0%, rgba(6,69,122,1) 49%, rgba(55,125,181,1) 100%);
+    }
+    
+    .cont{
+        padding-left: 1.3em;
+    }
+
+    .msg img{
+        width: 3em;
+        height: 3em;
+        margin-right: 5px;
+    }
+
+    .comment{
+        position: relative;
+        margin-left: 0.5%;
+        padding-left: 0.5%;
+        width: 98%;
+        font-family: 'Lexend';
+    }
+
+    textarea{
+        width: 100%;
+        border: none;
+        font-family: 'Lexend';
+        font-size: 1em;
+        margin-left: 0;
+        background-color: rgb(208, 229, 243);
+        color: black;
+        height: 10vh;
+    }
+
+    #comment_btn{ 
+        position: relative;
+        top: -20px;
+        left: 93%;
+        height: 2.3em;
+        background-color: cornflowerblue;
+        border: none;
+        color: whitesmoke;
+        font-size: 1.2em;
+        padding: 0.2em;
+        border-radius: 0.1em;
+        width: 5em;
+    }
+
+    #com-reacts a{
+        position: relative; 
+        left: 4em;
+    }
+
+    .note-editable{
+        color: azure;
+    }
+
+    .note-toolbar{
+        background-color: #94adc0;
+        border-bottom: none;
+    }
+
+    .note-btn-group{
+        background-color: #59a2da !important;
+    }
+
+    .comment-section {
+        display: none;
+    }
+
+    .search{
+        height: 2.3em;
+        margin-left: 3em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .search input{
+        width: 20em;
+    }
+
+    .search button{
+        height: 1.9em;
+        background-color: cornflowerblue;
+        border: none;
+        color: whitesmoke;
+        font-size: 1em;
+        padding: 0.2em;
+        border-radius: 0.1em;
+        width: 5em;
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+
+    .search button:hover{
+        width: 5.5em;
+        border: solid white;
+    }
+
+   
+    @media all and (max-width: 800px){
+        .chat{
+        display: block;
+        margin-left: 1em;
+        margin-right: 1em;
+        }
+
+
+        .side-bar{
+            position: absolute;
+            right: 10px;
+            height: 5em;
+        }
+
+        .side-bar h2{
+            font-size: 1em;
+        }
+
+        .search{
+            position: relative;
+            right: 4em;
+        }
+
+
+        #pic{
+            width: 3em;
+            height: 3em;
+        }
+
+        .reacts{
+            left: 50%;
+        }
+
+        #comment_btn{
+            left: 72%;
+        }
+
+    }
+    </style>
+    {% endblock %}
+    {% block content %}     
+    <div class="posts">
+        <h1>Posts</h1>
+        <form class="search">
+            <input type="search" placeholder="Search by Subject" name="search">
+            <button id="search_btn" type="submit" value="post">Search</button>
+        </form>    
+    </div>
+    <section class="chat">        
+        {% for post in posts|reverse %}
+        <div class="past_post">
+            <div class="msg">
+                <image src="{{ url_for('static', filename='profpics/' + post.poster.img) }}" >
+                    <div class="texter">
+                    <h3> {{ post.subject }} </h3>
+                    <p> Posted by {{ post.poster.name }} at <span style="color: rgba(0, 255, 255, 0.74);">{{ post.timestamp.strftime('%H:%M:%S : %d/%m/%Y') }}</span> </p>
+                </div>
+            </div>  
+            <div class="cont">
+                <p>{{ post.html|safe }}</p>
+            </div>  
+            <div class="reacts">
+                <p><a href="/posts/delete/{{post.pid}}">Delete</a></p>
+                <form action="/posts/like/{{post.pid}}" method="POST"><button type="submit"><i class="fa fa-thumbs-o-up" style="margin-top: 10px; font-size:26px;"></i></button></form>
+                <p> {{ post.likes }} </p>
+                <a href="javascript:void();" class="readmore" id="{{ post.pid }}"><i class="fa fa-comment" style="margin-top: 10px; font-size:26px; cursor: pointer;"></i></a>                        
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+                  <script>
+                      $(".readmore").filter("#{{ post.pid }}").on('click', function(){
+                          $(".comment-section").filter("#{{ post.pid }}").toggle(300);
+                      });
+                  </script>
+           </div>
+            <div class="comment comment-section" id="{{ post.pid }}">
+                <div id="comment-form" class="comment">
+                    <form action="/posts/comment/{{ post.pid }}" method="POST">
+                        Comment <textarea name="commentdata"></textarea>
+                        <br>
+                        <br>
+                        <button id="comment_btn" type="submit" value="post">Comment</button>
+                    </form>    
+                </div>
+                {% for comment in comments|reverse %}
+                {% if comment.comment_to == post %}
+                <div class="comment">
+                    <hr>
+                    <div class="msg">
+                        <image src="{{ url_for('static', filename='profpics/' + comment.commenter.img) }}" >
+                        <div class="texter">
+                            <p> Comment by {{ comment.commenter.name }} at <span style="color: rgba(0, 255, 255, 0.74);">{{ comment.timestamp.strftime('%H:%M:%S : %d/%m/%Y') }}</span> </p>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <p>{{ comment.comment|safe }}</p>            
+                        </div>
+                    <div class="reacts" id="com-reacts">
+                        <p><a href="/posts/deletec/{{comment.cid}}">Delete Comment</a></p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </section>
+    <script>
+        // https://www.jqueryscript.net/text/wysiwyg-editor-summernote.html
+        $('#summernote').summernote({
+          placeholder: "What's on your mind?",
+          tabsize: 2,
+          height: 120,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+        });
+        
+      </script>
+    {% endblock %}

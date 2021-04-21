@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Event Calendar</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        #top_bar {
+            position: relative;
+            display: flex;
+            padding-top: 0.2em;
+            align-items: center;
+            justify-content: space-between;
+            height: 5em;
+            color: rgb(255, 227, 255);
+        }
+
+        #top_bar::before {
+            position: absolute;
+            background-color: #ff5ea1;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: '';
+        }
+
+        .top h1{
+            position: relative;
+            width: 8rem; 
+            margin-left: 0.2em; 
+            font-family: 'Merriweather', sans-serif;
+            font-size: 3em; 
+            align-content: center;
+        }
+
+                       
+        #prof-pic{
+            display: flex;
+            color: white;
+            position: relative;
+            width: 10em;
+            height: 4em;
+            align-items: center;
+            justify-items: center;
+            }
+            #prof-pic a{
+                text-decoration: none;
+            }
+            #prof-pic p{
+                margin-left: 3px;
+            }
+            #prof-pic img{
+                position: relative;
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+            }
+
+        *{
+            font-family: 'Merriweather';
+            }
+        body{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background: #a06b81;
+        }
+
+        .nav{
+            font-family: 'Poppins';
+            width: 6em;
+            padding-right: 3em;
+            margin-left: 4em;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            align-content: center;
+        }
+        .nav ul{
+            list-style: none;
+        }
+
+        .event-container{
+            font-family: "Roboto",sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .event-container h3.year{
+            font-size: 40px;
+            text-align: center;
+            border-bottom: 1px solid #b1b1b1;
+        }
+        .event-container .event{
+            box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.397);
+            display: flex;
+            border-radius: 8px;
+            margin: 17px 0;
+            transition: 0.2s ease;
+        }
+
+        .event-container .event:hover{
+            box-shadow: 0 10px 20px -9px rgba(0, 0, 0, 0.7);
+        }
+
+        .new-event-form{
+            padding: 1em;
+            justify-content: space-evenly;
+            box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.397);
+            display: flex;
+            border-radius: 8px;
+            margin: 32px 0;
+        }
+
+
+        .event .event-left{
+            background: rgb(255, 60, 135);
+            min-width: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eee;
+            padding: 8px 48px;
+            font-family: 'Poppins';
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px 0 0 8px; 
+        }
+        .event .event-left .date{
+            font-family: 'Poppins';
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .event .event-right{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 24px;
+        }
+        .event .event-right h3.event-title{
+            font-size: 24px;
+            margin: 24px 0 10px 0;
+            color: #0a6c99;
+            text-transform: uppercase;
+        }
+        .event .event-right .event-timing{
+            background: #fff8ba;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            padding: 8px;
+            border-radius: 16px;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        .event .event-right .event-timing img{
+            height: 20px;
+            padding-right: 8px;
+        }
+
+        .new-event-form input{
+            margin: 0.5em;
+        }
+
+        #post_btn{ 
+            position: relative;
+            top: 4px;
+            left: 88%;
+            height: 2.3em;
+            border-radius: 30%;
+            background-color: rgb(203, 124, 255);
+            border: none;
+            color: whitesmoke;
+            font-size: 1.2em;
+            padding: 0.2em;
+            border-radius: 0.1em;
+            width: 4em;
+        }
+
+        #post_btn:hover{
+            background: indianred;
+            border: rgb(238, 187, 187) solid 2px;
+        }
+
+        .reacts{
+            width: 30em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reacts a{
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .reacts a:hover{
+            font-weight: bolder;
+            color: rgb(247, 21, 4);
+        }
+
+        
+    .search{
+        margin-top: 1.2em;
+        height: 2.3em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .search input{
+        width: 20em;
+    }
+
+    .search button{
+        height: 1.9em;
+        background-color: cornflowerblue;
+        border: none;
+        color: whitesmoke;
+        font-size: 1em;
+        padding: 0.2em;
+        border-radius: 0.1em;
+        width: 5em;
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+
+    .search button:hover{
+        width: 5.5em;
+        border: solid white;
+    }
+
+        @media (max-width: 550px){
+            #prof-pic{
+                padding-right: 0;
+                width: 1em;
+                height: 1em;
+            }
+
+            #top_bar h1{
+                font-size: 2em;
+            }
+            .event{
+                flex-direction: column;
+            }
+
+            .event .event-left{
+                padding: 0;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .event .event-left .event-date .date,
+            .event .event-left .event-date .month{
+                display: inline-block;
+                font-size: 24px;
+            }
+
+            #post_btn{
+                left: 79%;
+            }
+
+            .reacts{
+                width: 100%;
+            }
+
+            .event .event-left .event-date{
+                padding: 10px 0;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div id="top_bar">
+            <div class="top"><h1>TSchedule</h1></div>
+            <div class="nav">
+                <ul>  
+                    <li><div id="prof-pic">
+                        <a href="/tplanner"><img src="{{url_for('static', filename='profpics/' + current_user.img)}}"></a>
+                        <p>Back</p>
+                      </div>   
+                    </li>    
+                </ul>
+            </div>    
+        </div>
+        <div class="event-container">
+            <form class="search">
+                <input type="search" placeholder="Search by Title" name="search">
+                <button id="search_btn" type="submit" value="post">Search</button>
+            </form>        
+            <div class="new-event-form">
+                <form name="eventform" action="/tplanner/calendar/new" method="POST">
+                    <input type="text" name="title" placeholder="Title">
+                    <input type="text" name="worker" placeholder="Assigned to">
+                    <input type="datetime-local" name="deadline" min="2018-06-07T00:00" max="2030-06-14T00:00">
+                    <br>
+                    <input style="width: 70%;" type="text" name="description" placeholder="Description/Search Keys">
+                    <br>
+                    <button id="post_btn" type="submit" value="post">Post</button>
+                </form>
+            </div>    
+            {% for event in events|reverse %}
+            <div class="event">
+                <div class="event-left">
+                    <div class="event-date">
+                        <h2>Deadline</h2>
+                        <div class="month" style="letter-spacing: 0.1em;">{{ event.deadline }}</div>
+                    </div>
+
+                </div>
+                <div class="event-right">
+                    <h3 class="event-title">{{ event.title }}</h3>
+
+                    <div class="event-description">
+                        {{ event.description }}
+                    </div>
+
+                    <div class="reacts">
+                        <div class="event-timing">
+                            {{ event.assigned }}
+                        </div>    
+                        <div class="delete">
+                            <p><a href="/calendar/delete/{{event.eid}}">Delete Event</a></p>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            {% endfor %}
+            <script>
+                const 
+            </script>
+        </div>
+    </body>
+</html>

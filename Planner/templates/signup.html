@@ -1,0 +1,27 @@
+{% extends 'base2.html' %}
+{% block title %}
+Sign up
+{% endblock %}
+
+    {% block nav %}
+    <li><a href="/">Sign in</a></li>
+    <li><a href="/register">Sign up</a></li>
+    {% endblock %}
+  {% block content %}
+  <div class="forms">
+    <form action="/register" method="POST">
+      <h2>Sign up</h2>
+      <br>
+      <div class="field"><p><input type="username" name="name" id="name" placeholder="Name" required></p></div>
+      <br>
+      <div class="field"><p><input type="username" name="email" id="email" placeholder="Email ID" required></p></div>
+      <br>
+      <br>
+      <p><button type="submit">Submit</button></p>
+      <p>You will receive a mail with the the password</p>
+    </form>
+    <br>
+    <p style="position: relative; color: burlywood;"><a href="/">Already registered? Log in</a></p>
+  </div>
+{% endblock %}
+  

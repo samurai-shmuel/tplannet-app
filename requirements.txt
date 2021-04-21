@@ -1,0 +1,6 @@
+WTForms~=2.3.3
+cryptography~=3.4.7
+Flask~=1.1.2
+python-dotenv~=0.17.0
+alembic~=1.5.8
+SQLAlchemy~=1.4.5

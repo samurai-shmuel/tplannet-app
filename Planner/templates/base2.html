@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title> Tplannet - {% block title %}{% endblock %} </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Gorditas&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Kiwi+Maru&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+        .body{
+            margin: 0;
+        }
+
+        .leo{
+            position: relative;
+            height: 130vh;
+            background: url('../static/leo.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: inherit;
+            overflow-x: hidden;
+        }
+
+        .content{
+            padding: 2.3em 30%;
+        }
+
+                
+        #prof-pic{
+                color: white;
+                position: relative;
+                width: 10em;
+                height: 4em;
+                align-items: center;
+            }
+            #prof-pic p{
+                margin-top: 0.4em;
+            }
+            #prof-pic img{
+                position: relative;
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+            }
+
+        #top_bar {
+            position: relative;
+            display: flex;
+            padding-top: 0.2em;
+            align-items: center;
+            justify-content: space-between;
+            height: 5em;
+            color: rgb(255, 222, 172);
+        }
+
+        #top_bar::before {
+            position: absolute;
+            background-color: #df6c00;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            content: '';
+        }
+
+        .top h1{
+            position: relative;
+            width: 8rem; 
+            margin-left: 0.2em; 
+            font-family: 'Raleway', sans-serif;
+            font-size: 3em; 
+            align-content: center;
+        }
+        
+        .nav{
+            position: relative;
+            margin-right: 0em;
+            width: 17%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav ul{
+            display: inline-flex;
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav li{
+            display: flex;
+            width: 6em;
+            align-items: center;
+        }
+
+        .nav a{
+            font-size: 1.2em;
+            margin: 0em;
+        }
+        
+    .forms{
+      font-family: 'Raleway';
+      width: 100%;
+      position: relative;
+      margin-top: 6rem;
+      padding: 2rem;
+      text-align: center;
+      -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+      box-shadow: 2px 2px 3px #0000001a;
+      display: block;
+      top: 0em;
+      font-size: 1.4em;
+      font-weight: 400;
+    }
+
+    .forms::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      opacity: 0.5;
+    }
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Raleway';
+    }
+
+    .field{
+        margin-bottom: 0.5em;
+    }
+
+    .forms h2{
+      position: relative;
+      color: rgb(255, 215, 85);
+      font-family: 'Kiwi Maru';
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+    
+    .forms p{
+        color: yellow;
+    }
+
+    .forms input{
+        position: relative;
+        text-decoration: none;
+        padding: 0.3em 2.4em;
+        background-color: transparent;
+        border: none;
+        font-size: 1em;
+        text-align: center;
+        border-bottom: rgb(255, 153, 0) solid;
+        color:rgb(255, 255, 219);
+    }
+
+    .forms button{
+        position: relative;
+        margin-top: 1%;
+        width: 6em;
+        padding: 0.5em;
+        border: solid white 2px;
+        border-radius: 4%;
+        color: white;
+        font-size: 1em;
+        background-color: transparent;
+        transition: width 0.6s;
+    }
+
+    .forms button:hover{
+        background-color: rgba(255, 255, 255, 0.959);
+        border: solid rgb(255, 255, 255) 2px;
+        color: black;
+        width: 8em;
+    }
+
+    .pic input{
+        padding-left: 20%;
+        border: none;
+    }
+
+
+    .submit input{
+        position: relative;
+        margin-top: 1%;
+        width: 6em;
+        padding: 0.5em;
+        border: solid white 2px;
+        border-radius: 4%;
+        color: white;
+        font-size: 1em;
+        background-color: transparent;
+        transition: width 0.6s;
+    }
+
+    .submit input:hover{
+        background-color: rgba(255, 255, 255, 0.959);
+        border: solid rgb(255, 255, 255) 2px;
+        color: black;
+        width: 8em;
+    }
+
+    #top_bar i{
+        position: absolute;
+        top: 0.75rem;
+        right: 1rem;
+        display: none;
+    }
+
+
+    ::placeholder{
+        color: rgb(204, 224, 255);
+    }
+
+    @media only screen and (max-width: 800px){
+        .body{
+            height: 150vh;
+        }
+
+        h1{
+            font-size: 2em;
+        }
+
+        .leo{
+            overflow-x: hidden;
+        }
+
+        #top_bar{
+            display: flex;
+            flex-direction: column;
+            height: 20vh;
+        }
+
+        .content{
+            padding: 0 0em;
+        }
+
+        #prof-pic{
+            padding-top: 0.6em;
+        }
+
+        .forms{
+            margin-left: 0;
+            margin-top: 7rem;
+            width: 100%;
+            font-size: smaller;
+        }
+
+        #top_bar i{
+            display: flex;
+            font-size: 2em;
+        }
+
+        .nav{
+            display: none;
+            margin-right: 135%;
+        }
+
+        .nav a{
+            font-size: 1em;
+            transition: 0.2 ease;
+        }
+
+        .nav ul{
+            margin-left: 8rem;
+            justify-content: space-between;
+        }
+
+        .nav li{
+            width: 5em;
+            margin: 0.5em;
+        }
+
+        .top h1{
+            width: 13rem;
+            font-size: 2em;
+        }
+
+    }
+
+    @media only screen and (max-height: 500px){
+        .leo{
+            height: 130vh;
+        }
+        .content{
+            margin-top: 0;
+            padding: 0 1em;
+        }
+        .forms{
+            top: -3%;
+            font-size: 0.9em;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        .nav a{
+            margin: 0;
+        }
+        .nav li{
+            width: 10em;
+        }
+    }
+    </style>
+    {% block styles %}
+    {% endblock %}  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="leo">
+        <div id="top_bar">
+            <div class="top"><h1>TPlannet</h1></div>
+            <i id="menu" class="fa fa-bars" aria-hidden="true"></i>
+            <div class="nav">
+                <ul>
+                    {% block nav %}
+                    {% endblock %}
+               </ul>
+            </div>    
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>    
+    </section>
+    <script>
+        $("#menu").on('click', function(){
+            $(".nav").toggle(300);
+        });
+    </script>
+</body>
+</html>

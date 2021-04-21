@@ -1,0 +1,29 @@
+{% extends 'base2.html' %}
+  {% block title %}
+  Login
+  {% endblock %}
+
+  {% block nav %}
+  <li><a href="/about">About</a></li>
+  <li><a href="/">Sign in</a></li>
+  <li><a href="/register">Sign up</a></li>
+  {% endblock %}
+
+  {% block content %}
+  <div class="forms">
+    <form action="/" method="POST">
+        <h2>Login</h2>
+        <br>
+        <div class="field"><p><input type="username" name="username" id="email" placeholder="Email" required></p></div>
+        <br>
+        <div class="field"><p><input type="password" name="password" id="password" placeholder="Password" required></p></div>
+      <br><br>
+        <input type="checkbox" name="logged" id="logged"> <span style="color: rgb(255, 230, 0); position: relative;">Keep me logged
+            in</span>
+        <p><button type="submit">Continue</button></p>
+    </form>
+    <br>
+    <p style="position: relative; color: burlywood;"><a href="/register">Not registered? Sign up</a></p>
+  </div>
+{% endblock %}
+  

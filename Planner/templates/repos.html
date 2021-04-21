@@ -1,0 +1,313 @@
+<html>
+    <head>
+        <title>Repository links</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Gorditas&display=swap');
+
+            body{
+                margin: 0;
+                font-family: 'Lexend';
+                font-weight: 400;
+            }
+            header,footer,aside{
+                display: block;
+            }
+
+            #prof-pic{
+                color: white;
+                position: absolute;
+                right: -3em;
+                top: 2em;
+                width: 10em;
+                height: 4em;
+                align-items: center;
+            }
+
+            img{
+                position: relative;
+                width: 3em;
+                height: 3em;
+                border-radius: 50%;
+            }
+
+            .bars{
+                display: flex;
+            }
+            h1{
+                color: rgb(255, 251, 0);
+                text-align: center;
+                font-size: 2.4rem;
+            }
+
+            label{
+                width: 8em;
+                display: block;
+                color: rgb(73, 255, 73);
+            }
+
+            fieldset{
+                border: none;
+            }
+
+            input{
+                width: 200px;
+            }
+            button{
+                font-size: 1em;
+                padding: 0.3em;
+                border: none;
+                margin: 0.5em;
+                border-radius: 2px;
+                background: #00970d;
+                color: #ffffff;
+                float: right;
+                width: 100px;
+            }
+            table{
+                margin: 2.5em;
+                width: 55em;
+                border-collapse: collapse;
+            }
+            th{
+                background: #beff74;
+            }
+            th,td{
+                border: 2px solid rgb(16, 117, 21);
+                padding: 10px;
+                justify-content: center;
+                text-align: center;
+            }
+            .container{
+                width: 100%;
+                margin: 0;
+            }
+            .headerbar{
+                width: 100%;
+            }
+            .headerbar.top{
+                background: #10774c;
+                min-height: 100px;
+
+            }
+            .headerbar.bottom{
+                background: #005331;
+                min-height: 60px;
+            }
+            .leftbar{
+                width: 30%;
+                padding: 3em;
+                background: rgb(36, 66, 53);
+                min-height: 60vh;
+                overflow-y: visible;
+            }
+            .rightbar{
+                width: 70%;
+                padding: 1em;
+                background: rgb(17,207,40);
+                background: linear-gradient(180deg, rgba(17,207,40,1) 11%, rgba(201,255,95,1) 81%);                
+                min-height: 80vh;
+                padding: 10px;
+                
+            }
+
+            button:hover{
+                border: solid 2px;
+                color: rgb(205, 255, 89);
+                border-color: rgb(200, 255, 97);
+            }
+
+            @media all and (max-width: 500px){
+                table{
+                    width: 10em;
+                    margin: 0;
+                    font-size: 0.65em;
+                }
+                #prof-pic{
+                    right: -20em;
+                }
+                .bars{
+                    display: block;
+                }
+
+                .leftbar{
+                    width: 180%;
+                    padding: 0.62em;
+                }
+
+                .rightbar{
+                    width: 180%;
+                }
+
+                .headerbar{
+                    width: 186.2%;
+                }
+
+                #links{
+                    width: 4.5em;
+                }
+
+            }
+        </style>
+ 
+    </head>
+    <body onload="init()">
+        <div class="container">
+            <header class="headerbar top">
+                <h1>TSuite</h1>
+                <div id="prof-pic">
+                    <img src="{{url_for('static', filename='profpics/' + user.img)}}" val>
+                </div>
+                <a href="/tplanner" style="text-decoration: none; width: 10em; float: left; margin-left: 3em; color: rgb(255, 166, 0); position: relative;">Return to dashboard</a>
+            </header>
+            <div class="bars">
+                <div class="leftbar">
+                    <div>
+                        <fieldset>
+                        <label for="firstname"><span>Course Name</span></label>
+                        <input type="text"  id="cname">
+                        </fieldset>
+                        <fieldset>
+                        <label for="lastname">Topic</label>
+                        <input type="text"  id="topic">
+                        </fieldset>
+                        <fieldset>
+                        <label for="rollnum">Link</label>
+                        <input type="text"  id="link">
+                        </fieldset>
+                        <fieldset>
+                        <label for="subject">Status</label>
+                        <select id="status">
+                            <option value="Pending">Pending</option>
+                            <option value="On Progress">On Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        </fieldset>
+                        <fieldset>
+                        <label for="submit">&nbsp;</label>
+                        <button id="submit" onclick="onRegisterPressed()">Register</button>
+                        <button id="clear" onclick="onClarPressed()">Clear</button>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="rightbar">
+                    <table id="regtable">
+                        <thead>
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Topic</th>
+                                <th id="links" style="width: 17em;">Link</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody  id="tablerows">
+                           
+                        </tbody>
+                    </table>
+                </div>
+    
+            </div>
+            <footer class="headerbar bottom"></footer>
+
+        </div>
+
+    </body>
+    <script>
+            
+        var sArray=[];
+        var selectedIndex=-1;
+
+        function init(){
+            document.getElementById("tablerows").innerHTML="";
+            if(localStorage.sRecord){
+                sArray=JSON.parse(localStorage.sRecord);
+                for(var i=0;i<sArray.length;i++){
+                    prepareTableCell(i, sArray[i].cname, sArray[i].topic, sArray[i].link, sArray[i].status);
+
+                }
+
+            }
+
+        }
+
+
+        function onRegisterPressed(){
+            var cName=document.getElementById("cname").value;
+            var tOpic=document.getElementById("topic").value;
+            var lInk=document.getElementById("link").value;
+            var status=document.getElementById("status").value;
+
+            var stuObj={cname:cName, topic:tOpic, link:lInk, status:status};
+            if(selectedIndex===-1){
+                sArray.push(stuObj);
+
+            }else{
+                sArray.splice(selectedIndex,1,stuObj);
+            }
+
+           
+
+            localStorage.sRecord=JSON.stringify(sArray);
+            
+           init();
+           onClarPressed();
+
+        
+            
+            
+        }
+        function prepareTableCell(index, cName, tOpic, lInk, status){
+            var table=document.getElementById("tablerows");
+            var row=table.insertRow();
+            var cNameCell=row.insertCell(0);
+            var tOpicCell=row.insertCell(1);
+            var lInkCell=row.insertCell(2);
+            var statusCell=row.insertCell(3);
+            var actionCell=row.insertCell(4);
+
+
+            cNameCell.innerHTML=cName;
+            tOpicCell.innerHTML=tOpic;
+            lInkCell.innerHTML='<a href='+lInk+'>'+lInk+'</a>';
+            statusCell.innerHTML=status;
+            actionCell.innerHTML='<button onclick="onEditPressed('+index+')">Edit</button><br/><button onclick="deleteTableRow('+index+')">Delete</button>';
+
+
+        }
+
+        function deleteTableRow(index){
+            /*var table=document.getElementById("regtable");
+            table.deleteRow(index+1);*/
+            sArray.splice(index,1);
+            localStorage.sRecord=JSON.stringify(sArray); 
+            init();
+
+        }
+        function onClarPressed(){
+            selectedIndex=-1;
+            document.getElementById("cname").value="";
+            document.getElementById("topic").value="";
+            document.getElementById("link").value="";
+            document.getElementById("status").value="Pending";
+            document.getElementById("submit").innerHTML="Register";  
+
+
+        }
+        
+        function onEditPressed(index){
+            selectedIndex=index;
+
+            var stuObj=sArray[index];
+            document.getElementById("cname").value=stuObj.cname;
+            document.getElementById("topic").value=stuObj.topic;
+            document.getElementById("link").value=stuObj.link;
+            document.getElementById("status").value=stuObj.status;
+            document.getElementById("submit").innerHTML="Update";     
+
+        }
+    </script>
+
+</html>

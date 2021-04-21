@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}{% endblock %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+        
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            font-family: 'Source Sans Pro';
+        }
+        
+        body{
+            background:#163044;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: azure;
+            width: 100%;
+            height: 100%;
+        }
+
+        #blue_bar {
+            background-color: #007fd4;
+            display: flex;
+            justify-content: space-between;
+            height: 5em;
+            width: 100%;
+            color: azure;
+            background-blend-mode:lighten;
+        }
+        
+        
+
+        .top h1{
+            width: 8rem; 
+            margin-left: 0.5em; 
+            font-family: 'Lexend', sans-serif;
+            font-size: 3em; 
+            align-content: center;
+        }
+        
+        .nav{
+            width: 30%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav ul{
+            display: inline-flex;
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav a{
+            font-size: 1.2em;
+            margin: 1em;
+        }
+
+        .side-bar{
+            height: 82vh;
+        }
+        
+        .snip{
+            -webkit-backdrop-filter: blur(3px);
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhNd4wV7CAF4r8QZNq24vQLOgvCAUDfVlVkM-nbwKlZy8sOaW9JfaWI1VMZS-WgoQf_8E&usqp=CAU');
+            border-radius: 0.5rem;
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            font-size: 1em;
+        }
+        
+        @media all and (max-width: 500px){
+
+            .snip{
+                margin: 1em;
+                width: 5em;
+                height: 3em;
+            }
+
+            .side-bar{
+                width: 1px;
+            }
+
+            body{
+                width: 160vw;
+                height: 160vh;
+                overflow-x: hidden;
+            }
+
+            .top h1{
+                margin-left: 0;
+            }
+
+            .nav{
+                width: 60%;
+            }
+            .nav ul{
+                font-size: 0.8em;
+                margin-block-start: 0;
+                margin-block-end: 0;
+                padding-inline-start: 40px;
+            }
+
+        }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div id="blue_bar">
+        <div class="top"><h1>Tlogger</h1></div>
+        <div class="nav">
+            <ul>
+                <li><a href="/tplanner/tlogger/posts">Posts</a></li>
+                <li><a href="/tplanner/tlogger/create">Create Post</a></li>
+                <li><a href="/tplanner">Return</a></li>
+            </ul>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

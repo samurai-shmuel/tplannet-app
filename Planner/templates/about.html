@@ -1,0 +1,100 @@
+{% extends 'base2.html' %}
+    {% block title %}
+    About
+    {% endblock %}
+    {% block styles %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        .forms{
+            margin-top: 3rem;
+        }
+
+        .heading{
+            font-family: 'Itim';
+            position: relative;
+            color: rgb(255, 255, 255);
+            text-shadow: burlywood 2px 2px;
+            font-size: 3rem;
+            margin-bottom: 1em;
+        }
+
+        .forms a:hover{
+            color: rgb(239, 252, 124);
+        }
+
+        .contents p{
+            font-family: 'Poppins';
+            font-size: 0.8em;
+            position: relative;
+        }
+
+        .contents ul{
+            position: relative;
+        }
+
+        .contents li{
+            font-family: 'Poppins';
+            color: rgb(255, 174, 0);
+        }
+
+        .contents p span{
+            font-size: larger; 
+            color: rgb(245, 219, 186);
+            transition: 0.4s ease;
+        }
+
+        .contents p span:hover {
+            color: red;
+            font-size: 2em;
+        }
+        @media only screen and (max-width: 800px){
+        
+        .heading{
+            font-size: 3em;
+        }
+
+        .nav{
+            display: flex;
+            margin-right: 135%;
+        }
+
+        .forms{
+            margin-top: 2rem;
+        }
+    
+        .leo{
+            overflow-x: visible;
+        }
+
+        }
+    </style>
+    {% endblock %}
+    {% block nav %}
+    <li><a href="  https://team-a-orcas.github.io/">Portfolio</a></li>
+    {% endblock %}
+
+    {% block content %}
+    <div class="forms">
+        <div class="heading">
+            <h1>Meet us</h1>
+        </div>
+        <div class="contents">
+            <p>The members of Team A have worked toward a common goal and this unity has allowed common people like us to attain uncommon results. So we forged a way to coordinate our hunt for success, which your eyes now see.
+                We are a pride of hungry lions in pursuit of success and you know what they say about the lion's belly. <br>
+                <span>#MyTeamIsHungry</span><br><br>
+                <ul style="list-style: none;">
+                    <li>Puranan. M - MSM19B001</li>
+                    <li>Samuel Tom Joseph - MSM19B002</li>
+                    <li>Sri Rahul V. C - MSM19B041</li>
+                    <li>Syed Asfahan Awaiz- MSM19B039</li>
+                </ul>
+                <small style="font-size: smaller; color: yellow; position: relative;">Contact us by mail: msm19b0xx@iiitdm.ac.in</small>
+                <br><br>
+            </p>
+        </div>    
+        <a style="position: relative;" href="/tplanner">Back</a>
+    </div>
+    
+    {% endblock %}

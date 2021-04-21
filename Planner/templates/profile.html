@@ -1,0 +1,136 @@
+{% extends 'base2.html' %}
+{% block styles %}
+<style>
+  body{
+    overflow-x: hidden;
+  }
+
+  .leo{
+    height: 135vh;
+    overflow-x: hidden;
+  }
+
+  #pic{
+    border: none;
+    padding-left: 22%;
+  }
+
+  #pict{
+    border-radius: 50%;
+    position: relative;
+    margin-top: 0.1em;
+    width: 5em;
+    height: 5em;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  #pict:hover{
+    border: solid blanchedalmond;
+  }
+
+  .forms{
+    margin-top: 0.7rem;
+  }
+
+  #file-entry input{
+    border: none;
+  }
+
+  #upload-btn{
+    padding-right: 2.6em;
+    border: 2px solid;
+    width: 8em;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5%;
+    color: white;
+    transition: 0.3s ease;
+  }
+
+  #upload-btn:hover{
+    background-color: white;
+    color: black;
+    border-color: white;
+    width: 10em;
+  }
+
+  @media only screen and (max-width: 800px){
+
+        .content{
+          padding-left: 3%;
+          display: flex;
+          flex-direction: column;
+          justify-items: center;
+          width: 120%;
+          top: 10rem;
+        }
+
+        body{
+          overflow-x: scroll;
+        }
+        
+        .nav{
+            display: flex;
+            margin-right: 0%;
+        }
+
+        .disp{
+          width: 80%;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .leo{
+          overflow-y: scroll;
+        }
+
+        }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+{% endblock %}
+{% block nav %}
+<li><a href="/tplanner">Back</a></li>
+<div id="prof-pic">
+  <a href="/tplanner/profile"><img src="{{url_for('static', filename='profpics/' + current_user.img)}}"></a>                        
+{% endblock %}
+
+{% block content %}
+<div class="disp forms">
+  <h2>Profile Details</h2>
+  <img id="pict" src=" {{ image }} ">
+  <div class="prof-content">
+    <p style="position: relative;"><span style="color: wheat;">Name: </span>{{ current_user.name }}</p>
+    <p style="position: relative;"> <span style="color: wheat;">Email: </span>{{ current_user.email }} </p>
+    <p style="position: relative; color: blanchedalmond; font-size: smaller;">Click on the picture</p>
+  </div>
+</div>
+<div class="disp forms" id="upload-pic" style="display: none; margin: 1rm 3rem;">
+    <form name="forms" action="/tplanner/profile" method="POST" enctype="multipart/form-data">
+        <h2>Upload Profile Pic</h2>
+        <input id="file-entry" style="margin-left: 3em;border: none;" type="file" name="pic">
+        <br>
+        <input class="submit"id="upload-btn" type="submit" value="Upload">
+    </form>
+  </div>
+  <div class="disp forms" id="upload-about" style="display: none;">
+    <form name="forms" action="/tplanner/profile/about-upload" method="POST">
+        <h2>About Yourself</h2><br>
+        <input type="text" name="about_me" placeholder="About Yourself">
+        <br>
+        <br>
+        <input class="submit"id="upload-btn" type="submit" value="Write">
+    </form>
+  </div>
+  <script>
+      $("#pict").on('click', function(){
+      $("#upload-pic").toggle(300);
+      $("#upload-about").toggle(300);
+  });
+  </script>
+
+{% endblock %}
