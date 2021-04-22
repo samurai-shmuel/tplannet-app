@@ -57,7 +57,7 @@ def signup():
         name = request.form.get('name')
         new_user = User(email=email, name=name)
         msg = Message(f"Request to join the team", recipients=['msm19b002@iiitdm.ac.in'])
-        msg.html = f'A new teammate is coming to join with the following details: <br> Name: {name} <br> Email: {email}. To let him in <a href="localhost/permission/params?mail={enc_email}">click here</a> '
+        msg.html = f'A new teammate is coming to join with the following details: <br> Name: {name} <br> Email: {email}. He says <quote>{request.form.get("intro")}</quote> <br>To let him in <a href="localhost/permission/params?mail={enc_email}">click here</a> '
         mail.send(msg)
         db.session.add(new_user)
         db.session.commit()
