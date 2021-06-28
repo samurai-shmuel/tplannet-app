@@ -1,4 +1,4 @@
-This is the first web app created as a team, and the access is only through a team password that you get when you join. So, I'll show you the multiple views within (mildly responsive) 
+This is the first web app created as a team, using Flask, HTML, CSS, Jquery. The access is only through a team password that you get when you join. So, I'll show you the multiple views within (mildly responsive) 
 
 Check it out here: http://tplannet.herokuapp.com/
 
