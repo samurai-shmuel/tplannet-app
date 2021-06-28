@@ -1,5 +1,7 @@
 This is the first web app created as a team, using Flask, HTML, CSS, Jquery. The access is only through a team password that you get when you join. So, I'll show you the multiple views within (mildly responsive) 
 
+Teammates: Samuel Tom Joseph, Sri Rahul V. C, Puranan M., Syed Asfahan Awaiz
+
 Check it out here: http://tplannet.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/79624130/123646566-f681a780-d844-11eb-8436-d1ff0738ccee.png)
